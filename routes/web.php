@@ -1,10 +1,35 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ExampleController;
 
-// Route::get('accounts', function () {
-//     return view('welcome');
+Route::get('', function () {
+    return view('welcome');
+});
+
+Route::get('Contact',[ExampleController::class , 'Contact']);
+
+Route::post('contactData', [ExampleController::class , 'data'])->name('contactData');
+
+// Route::get('login',[ExampleController::class , 'login']);
+
+// Route::post('receive', function () {
+//     return "done";
+// })->name('receive');
+
+// Route::get('link' ,function(){
+//     $url = route('w');
+// return "<a href='$url'>Go to welcome</a>";
 // });
+// Route::get('welcome' ,function(){
+//     return "Welcome to laravel";
+//     })->name('w');
+
+// Route::get('cv', function () {
+//     return view('cv');
+// });
+//or
+// Route::view('cv' , 'cv'); but it's not the best practise
 
 // Route::get('/w', function () {
 //     return "Hello Laravel!";
@@ -40,26 +65,47 @@ use Illuminate\Support\Facades\Route;
 //     return " movie category: " . $category;
 // })->whereIn('category', ['horror', 'action', 'drama']);
 
-Route::prefix('accounts')->group(function () {
-    Route::get('', function () {
-        return 'Accounts Index';
-    });
-    Route::get('admin', function () {
-        return 'Account Admin';
-    });
-    Route::get('user', function () {
-        return 'Account User';
-    });
-});
+// task
 
-Route::prefix('cars')->group(function () {
-    Route::get('', function () {
-        return 'Cas Index';
-    });
-    Route::get('usa/{type}', function ($type) {
-        return 'Car manufactured in USA : ' . $type;
-    })->whereIn('type', ['ford', 'tesla']);
-    Route::get('ger/{type}', function ($type) {
-        return 'Car manufactured in GER : ' . $type;
-    })->whereIn('type', ['mercedes', 'audi', 'volkswagen']);
-});
+// Route::prefix('accounts')->group(function () {
+//     Route::get('', function () {
+//         return 'Accounts Index';
+//     });
+//     Route::get('admin', function () {
+//         return 'Account Admin';
+//     });
+//     Route::get('user', function () {
+//         return 'Account User';
+//     });
+// });
+
+// Route::prefix('cars')->group(function () {
+//     Route::get('', function () {
+//         return 'Cas Index';
+//     });
+//     Route::prefix('usa')->group(function () {
+//         Route::get('ford', function () {
+//             return "cars ford";
+//         });
+//         Route::get('tesla', function () {
+//             return "Hello tesla";
+//         });
+//     });
+//     Route::prefix('ger')->group(function () {
+//         Route::get('mercedes', function () {
+//             return "cars mercedes";
+//         });
+//         Route::get('audi', function () {
+//             return "Hello audi";
+//         });
+//         Route::get('volkswagen', function () {
+//             return "Hello volkswagen";
+//         });
+//     });
+// });
+// end task
+
+//we make this code after we finish the application and make sure we didn't make any error - make this code Just before submitted the application-.
+// Route::fallback(function () {
+//     return redirect('/');
+// });
