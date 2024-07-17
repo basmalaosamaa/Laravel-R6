@@ -10,7 +10,7 @@ class ExampleController extends Controller
     //     return view('login');
     // }
 
-    function Contact () {
+    function contact () {
         return view('Contact');
     }
     function data () {
