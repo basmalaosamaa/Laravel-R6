@@ -7,7 +7,7 @@ Route::get('', function () {
     return view('welcome');
 });
 
-Route::get('Contact',[ExampleController::class , 'Contact']);
+Route::get('contact',[ExampleController::class , 'contact']);
 
 Route::post('contactData', [ExampleController::class , 'data'])->name('contactData');
 
