@@ -12,7 +12,7 @@ Route::get('Contact',[ExampleController::class , 'Contact']);
 Route::post('contactData', [ExampleController::class , 'data'])->name('contactData');
 
 // Route::get('login',[ExampleController::class , 'login']);
-
+/////////
 // Route::post('receive', function () {
 //     return "done";
 // })->name('receive');
