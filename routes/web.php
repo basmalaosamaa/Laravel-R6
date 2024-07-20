@@ -2,14 +2,21 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
+use App\Http\Controllers\CarController;
 
-Route::get('', function () {
-    return view('welcome');
-});
+// Route::get('', function () {
+//     return view('welcome');
+// });
 
-Route::get('Contact',[ExampleController::class , 'Contact']);
+Route::get('contact' ,[ExampleController::class , 'contact']);
+Route::post('contactdata' , [ExampleController::class , 'recieve'])->name('data');
+Route::get('cars/create',[CarController::class , 'create']);
+Route::post('cars',[CarController::class , 'store'])->name('cars.store');
 
-Route::post('contactData', [ExampleController::class , 'data'])->name('contactData');
+
+// Route::fallback(function () {
+//         return redirect('/');
+//     });
 
 // Route::get('login',[ExampleController::class , 'login']);
 

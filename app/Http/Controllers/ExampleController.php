@@ -6,19 +6,10 @@ use Illuminate\Http\Request;
 
 class ExampleController extends Controller
 {
-    // function login (){
-    //     return view('login');
-    // }
-
-    function Contact () {
+    function contact (){
         return view('Contact');
     }
-    function data () {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $subj = $_POST['subj'];
-        $msg = $_POST['msg'];
-      
-        return view('contactData', compact('name', 'email', 'subj', 'msg'));
-      }
+    function recieve (Request $request){
+        return $request['name'] . '<br>' . $request['email'] . '<br>' . $request['subj'] .'<br>'. $request['msg'];
+    }
 }
