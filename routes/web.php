@@ -3,15 +3,19 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
+use App\Http\Controllers\ClassroomController;
 
-// Route::get('', function () {
-//     return view('welcome');
-// });
+Route::get('', function () {
+    return view('welcome');
+});
 
 Route::get('contact' ,[ExampleController::class , 'contact']);
 Route::post('contactdata' , [ExampleController::class , 'recieve'])->name('data');
 Route::get('cars/create',[CarController::class , 'create']);
 Route::post('cars',[CarController::class , 'store'])->name('cars.store');
+
+Route::get('classroom/create' , [ClassroomController::class , 'create'])->name('class.create');
+Route::post('classrooms' , [ClassroomController::class, 'store'])->name('class.store');
 
 
 // Route::fallback(function () {
