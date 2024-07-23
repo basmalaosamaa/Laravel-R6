@@ -13,7 +13,9 @@ class ClassroomController extends Controller
      */
     public function index()
     {
-        //
+        $classes=Classroom::get();
+        return view('classes', compact('classes'));
+
     }
 
     /**
@@ -77,7 +79,8 @@ class ClassroomController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $class = Classroom::findorfail($id);
+        return view('edit_class' , compact('class'));
     }
 
     /**
