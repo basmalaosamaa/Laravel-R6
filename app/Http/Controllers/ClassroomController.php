@@ -37,12 +37,14 @@ class ClassroomController extends Controller
         // $data = request()->all();
         $className=request()->className;
         $capacity=request()->capacity;
-        $isFulled=request()->isFulled;
-        if (strtolower($isFulled) === "on") {
-            $isFulled = true;
-          } else {
-            $isFulled = false;
-          }
+        $isFulled=isset($request->isFulled);
+          //or
+          //if(isset(request->isFulled)){
+          // $isfulled = true;
+          //}else{
+         //  $isfulled = false;
+         //}
+          
         $price=request()->price;
         $timeFrom=request()->timeFrom;
         $timeTo=request()->timeTo;
