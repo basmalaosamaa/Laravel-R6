@@ -11,11 +11,15 @@ Route::get('', function () {
 
 Route::get('contact' ,[ExampleController::class , 'contact']);
 Route::post('contactdata' , [ExampleController::class , 'recieve'])->name('data');
+Route::get('cars',[CarController::class , 'index'])->name('cars.index');
 Route::get('cars/create',[CarController::class , 'create']);
 Route::post('cars',[CarController::class , 'store'])->name('cars.store');
+Route::get('cars/{id}' , [CarController::class , 'edit'])->name('cars.edit');
 
 Route::get('classroom/create' , [ClassroomController::class , 'create'])->name('class.create');
 Route::post('classrooms' , [ClassroomController::class, 'store'])->name('class.store');
+Route::get('classrooms' , [ClassroomController::class, 'index'])->name('class.index');
+Route::get('classrooms/{id}' , [ClassroomController::class, 'edit'])->name('class.edit');
 
 
 // Route::fallback(function () {
