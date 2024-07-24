@@ -37,30 +37,17 @@ class ClassroomController extends Controller
         // return $data;
         // dd($data);
         // $data = request()->all();
-        $className=request()->className;
-        $capacity=request()->capacity;
-        $isFulled=isset($request->isFulled);
-          //or
-          //if(isset(request->isFulled)){
-          // $isfulled = true;
-          //}else{
-         //  $isfulled = false;
-         //}
-          
-        $price=request()->price;
-        $timeFrom=request()->timeFrom;
-        $timeTo=request()->timeTo;
-       
-        $timeFrom= Carbon::parse($timeFrom)->format('H:i:s');
-        $timeTo = Carbon::parse($timeTo)->format('H:i:s');
-        Classroom::create([
-            'className' => $className ,
-            'capacity' => $capacity,
-            'isFulled'=> $isFulled,
-            'price' => $price,
-            'timeFrom' => $timeFrom,
-            'timeTo' => $timeTo,
-           ]);
+     
+        $data = [
+            'className' => $request->className,
+            'capacity' => $request->capacity,
+            'isFulled' => isset($request->isFulled),
+            'price' => $request->price,
+            'timeFrom' => Carbon::parse($request->timeFrom)->format('H:i:s'),
+            'timeTo' => Carbon::parse($request->timeTo)->format('H:i:s'),
+
+        ];
+        Classroom::create($data);
         
 
          return "added successfuly";
@@ -79,7 +66,7 @@ class ClassroomController extends Controller
      */
     public function edit(string $id)
     {
-        $class = Classroom::findorfail($id);
+        $class = Classroom::findOrfail($id);
         return view('edit_class' , compact('class'));
     }
 
