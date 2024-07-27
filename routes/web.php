@@ -21,10 +21,14 @@ Route::get('cars/{id}/show', [CarController::class , 'show'])->name('car.show');
 Route::get('cars/{id}/delete', [CarController::class , 'destroy'])->name('car.destroy');
 Route::get('cars/trashed' , [CarController::class , 'showDeleted'])->name('cars.showDeleted');
 
+//Task-6
+Route::get('classrooms' , [ClassroomController::class, 'index'])->name('class.index');
 Route::get('classroom/create' , [ClassroomController::class , 'create'])->name('class.create');
 Route::post('classrooms' , [ClassroomController::class, 'store'])->name('class.store');
-Route::get('classrooms' , [ClassroomController::class, 'index'])->name('class.index');
-Route::get('classrooms/{id}' , [ClassroomController::class, 'edit'])->name('class.edit');
+Route::get('classrooms/{id}/edit' , [ClassroomController::class, 'edit'])->name('class.edit');
+Route::put('classrooms/{id}' , [ClassroomController::class , 'update'])->name('class.update');
+Route::get('classroom/{id}/show' , [ClassroomController::class , 'show'])->name('class.show');
+Route::delete('class/{id}/delete' , [ClassroomController::class , 'destroy'])->name('class.destroy');
 
 
 // Route::fallback(function () {
