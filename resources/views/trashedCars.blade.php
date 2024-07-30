@@ -23,40 +23,35 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">All Classes</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">Trashed Cars</h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
-              <th scope="col">Class Name</th>
-              <th scope="col">Capacity</th>
+              <th scope="col">Car Title</th>
               <th scope="col">Price</th>
-              <th scope="col">Is Fulled</th>
-              <th scope="col">Time From</th>
-              <th scope="col">Time To</th>
-              <th scope="col">Edit</th>
-              <th scope="col">Show</th>
-              <th scope="col">Delete</th>
+              <th scope="col">Description</th>
+              <th scope="col">Published</th>
+              <th scope="col">Restore</th>
+              <th scope="col">Permanent Delete</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($classes as $class)
+            @foreach($cars as $car)
             <tr>
-              <td scope="row">{{$class['className']}}</td>
-              <td>{{$class['capacity']}}</td>
-              <td>{{$class['price']}}</td>
-              <td>{{$class['isFulled'] ? 'Yes' : 'No'}}</td>
-              <td>{{$class['timeFrom']}}</td>
-              <td>{{$class['timeTo']}}</td>
-              <td><a href="{{route('classes.edit', $class['id'])}}">Edit</a></td>
-              <td><a href="{{route('classes.show', $class['id'])}}">Show</a></td>
-              <td>
-                <form action="{{route('classes.destroy' , $class['id'])}}" method="post">
-                  @csrf
-                  @method('delete')
-                  <input type="hidden" name="id" value="{{$class['id']}}">
-                  <input type="submit" value="Delete">
-                </form>
-              </td>
+              <td scope="row">{{$car['carTitle']}}</td>
+              <td>{{$car['price']}}</td>
+              <td>{{Str::limit($car['description'] , 20)}}</td>
+              <td>{{$car['published'] ? 'Yes' : 'No'}}</td>
+              <td><form action="{{route('cars.restore' , $car['id'])}}" method="POST">
+                @csrf
+                @method('patch')
+                <button type="submit" class="btn btn-link m-0 p-0">Restore</button>
+              </form></td>
+              <td><form action="{{route('cars.permanentDelete' , $car['id'])}}" method="POST">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-link m-0 p-0" onclick=" return confirm('are you sure you want to delete it permanently? ')">Permanent Delete</button>
+              </form></td>
             </tr>
             @endforeach
           </tbody>
