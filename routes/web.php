@@ -1,35 +1,43 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassroomController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('', function () {
     return view('welcome');
 });
 
-Route::get('contact' ,[ExampleController::class , 'contact']);
-Route::post('contactdata' , [ExampleController::class , 'recieve'])->name('data');
+// Route::get('contact' ,[ExampleController::class , 'contact']);
+// Route::post('contactdata' , [ExampleController::class , 'recieve'])->name('data');
 
-Route::get('cars',[CarController::class , 'index'])->name('cars.index');
-Route::get('cars/create',[CarController::class , 'create']);
-Route::post('cars',[CarController::class , 'store'])->name('cars.store');
-Route::get('cars/{id}/edit' , [CarController::class , 'edit'])->name('cars.edit');
-Route::put('cars/{id}' , [CarController::class , 'update'])->name('cars.update');
-Route::get('cars/{id}/show', [CarController::class , 'show'])->name('car.show');
-Route::get('cars/{id}/delete', [CarController::class , 'destroy'])->name('car.destroy');
-Route::get('cars/trashed' , [CarController::class , 'showDeleted'])->name('cars.showDeleted');
+Route::prefix('cars')->group(function () {
+Route::get('', [CarController::class, 'index'])->name('cars.index');
+Route::get('create', [CarController::class, 'create']);
+Route::post('', [CarController::class, 'store'])->name('cars.store');
+Route::get('{car}/edit', [CarController::class, 'edit'])->name('cars.edit');
+Route::put('{id}', [CarController::class, 'update'])->name('cars.update');
+Route::get('{car}/show', [CarController::class, 'show'])->name('cars.show');
+Route::delete('{id}/delete', [CarController::class, 'destroy'])->name('cars.destroy');
+Route::get('trashed', [CarController::class, 'showDeleted'])->name('cars.showDeleted');
+Route::patch('{id}', [CarController::class, 'restore'])->name('cars.restore');
+Route::delete('{id}', [CarController::class, 'forceDelete'])->name('cars.permanentDelete');
+});
+//Task
+Route::prefix('classes')->group(function () {
 
-//Task-6
-Route::get('classrooms' , [ClassroomController::class, 'index'])->name('class.index');
-Route::get('classroom/create' , [ClassroomController::class , 'create'])->name('class.create');
-Route::post('classrooms' , [ClassroomController::class, 'store'])->name('class.store');
-Route::get('classrooms/{id}/edit' , [ClassroomController::class, 'edit'])->name('class.edit');
-Route::put('classrooms/{id}' , [ClassroomController::class , 'update'])->name('class.update');
-Route::get('classroom/{id}/show' , [ClassroomController::class , 'show'])->name('class.show');
-Route::delete('class/{id}/delete' , [ClassroomController::class , 'destroy'])->name('class.destroy');
-
+    Route::get('', [ClassroomController::class, 'index'])->name('classes.index');
+    Route::get('create', [ClassroomController::class, 'create'])->name('classes.create');
+    Route::post('', [ClassroomController::class, 'store'])->name('classes.store');
+    Route::get('{class}/edit', [ClassroomController::class, 'edit'])->name('classes.edit');
+    Route::put('{id}', [ClassroomController::class, 'update'])->name('classes.update');
+    Route::get('{class}/show', [ClassroomController::class, 'show'])->name('classes.show');
+    Route::delete('{id}/delete', [ClassroomController::class, 'destroy'])->name('classes.destroy');
+    Route::get('trashed', [ClassroomController::class, 'showDeleted'])->name('classes.showDelete');
+    Route::patch('{id}', [ClassroomController::class, 'restore'])->name('classes.restore');
+    Route::delete('{id}', [ClassroomController::class, 'forceDelete'])->name('classes.forceDelete');
+});
+// Route::resource('classes' , ClassroomController::class);
 
 // Route::fallback(function () {
 //         return redirect('/');

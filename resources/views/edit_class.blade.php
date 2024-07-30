@@ -32,7 +32,7 @@
     <div class="container my-5">
       <div class="form-container">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Edit Class</h2>
-        <form action="{{route('class.update' , $class['id'])}}" method="POST" class="px-md-5">
+        <form action="{{route('classes.update' , $class['id'])}}" method="POST" class="px-md-5">
           @csrf
           @method('put')
         <div class="form-group mb-3 row">

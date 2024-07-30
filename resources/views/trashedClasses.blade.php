@@ -23,7 +23,7 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">All Classes</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">Trashed Classes</h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
@@ -35,7 +35,8 @@
               <th scope="col">Time To</th>
               <th scope="col">Edit</th>
               <th scope="col">Show</th>
-              <th scope="col">Delete</th>
+              <th scope="col">restore</th>
+              <th scope="col">Permanent Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -49,14 +50,16 @@
               <td>{{$class['timeTo']}}</td>
               <td><a href="{{route('classes.edit', $class['id'])}}">Edit</a></td>
               <td><a href="{{route('classes.show', $class['id'])}}">Show</a></td>
-              <td>
-                <form action="{{route('classes.destroy' , $class['id'])}}" method="post">
-                  @csrf
-                  @method('delete')
-                  <input type="hidden" name="id" value="{{$class['id']}}">
-                  <input type="submit" value="Delete">
-                </form>
-              </td>
+              <td><form action="{{route('classes.restore' , $class['id'])}}" method="POST">
+                @csrf
+                @method('patch')
+                <button type="submit" class="btn btn-link m-0 p-0">Restore</button>
+              </form></td>
+              <td><form action="{{route('classes.forceDelete', $class['id'])}}" method="POST">
+                @csrf
+                @method('delete')
+              <button type="submit" class="btn btn-link m-0 p-0" onclick=" return confirm('are you sure you want to delete it permanently? ')">Permanent Delete</button>
+              </form></td>
             </tr>
             @endforeach
           </tbody>

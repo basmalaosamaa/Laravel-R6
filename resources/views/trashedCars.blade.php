@@ -31,9 +31,8 @@
               <th scope="col">Price</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
-              <th scope="col">Edit</th>
-              <th scope="col">show</th>
-              <th scope="col">Premenant Delete</th>
+              <th scope="col">Restore</th>
+              <th scope="col">Permanent Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -43,9 +42,16 @@
               <td>{{$car['price']}}</td>
               <td>{{Str::limit($car['description'] , 20)}}</td>
               <td>{{$car['published'] ? 'Yes' : 'No'}}</td>
-              <td><a href="{{route('cars.edit', $car['id'])}}">Edit</a></td>
-              <td><a href="{{route('car.show', $car['id'])}}">Show</a></td>
-              <td><a href="" >Delete</a></td>
+              <td><form action="{{route('cars.restore' , $car['id'])}}" method="POST">
+                @csrf
+                @method('patch')
+                <button type="submit" class="btn btn-link m-0 p-0">Restore</button>
+              </form></td>
+              <td><form action="{{route('cars.permanentDelete' , $car['id'])}}" method="POST">
+                @csrf
+                @method('delete')
+                <button type="submit" class="btn btn-link m-0 p-0" onclick=" return confirm('are you sure you want to delete it permanently? ')">Permanent Delete</button>
+              </form></td>
             </tr>
             @endforeach
           </tbody>
