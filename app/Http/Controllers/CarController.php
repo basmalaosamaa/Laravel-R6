@@ -29,15 +29,16 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $data = $request->validate([
-            'carTitle' => 'requierd|string',
-            'description' => 'requierd|string|max:1000',
-            'price' => 'requierd|numeric|max:6',
+            'carTitle' => 'required|string',
+            'description' => 'required|string|max:1000',
+            'price' => 'required',
         ]);
+        
         $data['published'] = isset($request->published);
+        
         Car::create($data);
-        return "Data added successfuly";
+        return redirect()->route('cars.index');
     }
 
     /**
@@ -63,12 +64,14 @@ class CarController extends Controller
     public function update(Request $request, string $id)
     {
         // dd($request , $id);
-        $data = [
-            'carTitle' => $request->carTitle,
-            'price' => $request->price,
-            'description' => $request->description,
-            'published' => isset($request->published),
-        ];
+        $data = $request->validate([
+            'carTitle' => 'required|string',
+            'description' => 'required|string|max:1000',
+            'price' => 'required',
+        ]);
+        
+        $data['published'] = isset($request->published);
+        
         Car::where('id', $id)->update($data);
         return redirect()->route('cars.index');
 

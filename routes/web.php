@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\ExampleController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('', function () {
@@ -23,6 +24,8 @@ Route::get('trashed', [CarController::class, 'showDeleted'])->name('cars.showDel
 Route::patch('{id}', [CarController::class, 'restore'])->name('cars.restore');
 Route::delete('{id}', [CarController::class, 'forceDelete'])->name('cars.permanentDelete');
 });
+Route::get('uploadForm' , [ExampleController::class , 'uploadForm']);
+Route::post('upload' , [ExampleController::class , 'upload'])->name('upload');
 //Task
 Route::prefix('classes')->group(function () {
 
