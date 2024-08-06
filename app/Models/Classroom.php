@@ -10,6 +10,7 @@ class Classroom extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $table = 'classes';
     protected $fillable = [
         'className',
         'capacity',

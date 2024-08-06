@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Add Car</title>
+  <title>Edit Car</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Edit Car</h2>
-        <form action="{{route('cars.update' , $car->id)}}" method="POST" class="px-md-5">
+        <form action="{{route('cars.update' , $car->id)}}" method="POST" class="px-md-5"  enctype="multipart/form-data">
           @csrf
           @method('put')
           <div class="form-group mb-3 row">
@@ -54,14 +54,22 @@
               @enderror
             </div>
           </div>
+          <div class="form-group mb-3 row">
+          <label for="image" class="form-label col-md-2 fw-bold text-md-end">Image:</label>
+          <div class="col-md-10">
+            <input type="file" id="image" name="image" class="form-control" value="{{old('image' , $car->image)}}">
+            <img src="{{ asset('assets/images/' . $car->image) }}" alt="" class="img-thumbnail" width="200" height="200">
+            @error('image')
+              <div class="alert alert-warning">{{$message}}</div>
+              @enderror
+            </div>
+          </div>
           <hr>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
             <div class="col-md-10">
-              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" @checked(old('published' , $car->published)) />
-              @error('published')
-              <div class="alert alert-warning">{{$message}}</div>
-              @enderror
+              <input type="hidden" name="published" value="0"> 
+              <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" value="1" {{ ($car->published || old('published')) ? 'checked' : '' }}/>
             </div>
           </div>
           <div class="text-md-end">

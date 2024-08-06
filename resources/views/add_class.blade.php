@@ -32,7 +32,7 @@
     <div class="container my-5">
       <div class="form-container">
         <h2 class="fw-bold fs-2 mb-5 pb-2">Add Class</h2>
-        <form action="{{route('classes.store')}}" method="POST" class="px-md-5">
+        <form action="{{route('classes.store')}}" method="POST" class="px-md-5" enctype="multipart/form-data">
           @csrf
         <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Class Name:</label>

@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Traits\Common;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+    use Common;
     /**
      * Display a listing of the resource.
      */
@@ -32,11 +34,12 @@ class CarController extends Controller
         $data = $request->validate([
             'carTitle' => 'required|string',
             'description' => 'required|string|max:1000',
-            'price' => 'required',
+            'price' => 'required|numeric',
+            'published' =>'boolean',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
         ]);
-        
-        $data['published'] = isset($request->published);
-        
+        // $data['published'] = isset($request->published);
+        $data['image'] = $this->uploadFile($request->image, 'assets/images');
         Car::create($data);
         return redirect()->route('cars.index');
     }
@@ -68,13 +71,19 @@ class CarController extends Controller
             'carTitle' => 'required|string',
             'description' => 'required|string|max:1000',
             'price' => 'required',
+            'published' =>'boolean',
+            'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
         ]);
-        
-        $data['published'] = isset($request->published);
-        
-        Car::where('id', $id)->update($data);
-        return redirect()->route('cars.index');
 
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadFile($request->image, 'assets/images');
+        }
+
+        // $data['published'] = isset($request->published);
+
+        Car::where('id', $id)->update($data);
+
+        return redirect()->route('cars.index');
     }
 
     /**
