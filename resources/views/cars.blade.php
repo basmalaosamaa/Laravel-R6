@@ -31,6 +31,7 @@
               <th scope="col">Price</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
+              <th scope="col">Image</th>
               <th scope="col">Edit</th>
               <th scope="col">show</th>
               <th scope="col">Delete</th>
@@ -43,6 +44,7 @@
               <td>{{$car['price']}}</td>
               <td>{{Str::limit($car['description'] , 20)}}</td>
               <td>{{$car['published'] ? 'Yes' : 'No'}}</td>
+              <td><img src="{{ asset('assets/images/' . $car->image) }}" alt="{{ $car->name }}" width="100" height="100"></td>
               <td><a href="{{route('cars.edit', $car['id'])}}">Edit</a></td>
               <td><a href="{{route('cars.show', $car['id'])}}">Show</a></td>
               <td><form action="{{route('cars.destroy' , $car['id'])}}" method="POST">

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->string('carTitle', 100);
             $table->text('description');
             $table->float('price');
-            $table->boolean('published');
+            $table->boolean('published')->default(false);
+            $table->string('image' , 100);
             $table->softDeletes();
             $table->timestamps();
         });

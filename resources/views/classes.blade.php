@@ -45,8 +45,8 @@
               <td>{{$class['capacity']}}</td>
               <td>{{$class['price']}}</td>
               <td>{{$class['isFulled'] ? 'Yes' : 'No'}}</td>
-              <td>{{$class['timeFrom']}}</td>
-              <td>{{$class['timeTo']}}</td>
+              <td>{{Carbon\Carbon::parse($class['timeFrom'])->format('h:i A')}}</td>
+              <td>{{Carbon\Carbon::parse($class['timeTo'])->format('h:i A')}}</td>
               <td><a href="{{route('classes.edit', $class['id'])}}">Edit</a></td>
               <td><a href="{{route('classes.show', $class['id'])}}">Show</a></td>
               <td>

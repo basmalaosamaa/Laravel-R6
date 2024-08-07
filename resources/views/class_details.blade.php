@@ -48,12 +48,12 @@
               </div>
               <div class="mb-4">
                 <p class="card-text">
-                  <span class="fw-bold">Time From:</span><br>{{$class['timeFrom']}}
+                  <span class="fw-bold">Time From:</span><br>{{Carbon\Carbon::parse($class['timeFrom'])->format('h:i A')}}
                 </p>
               </div>
               <div class="mb-4">
                 <p class="card-text">
-                  <span class="fw-bold">Time To:</span><br>{{$class['timeTo']}}
+                  <span class="fw-bold">Time To:</span><br>{{Carbon\Carbon::parse($class['timeTo'])->format('h:i A')}}
                 </p>
               </div>
               <div class="text-md-end">

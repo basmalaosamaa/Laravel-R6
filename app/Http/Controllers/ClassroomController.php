@@ -38,8 +38,8 @@ class ClassroomController extends Controller
             'className' => 'required|string',
             'capacity' => 'required|Numeric|max:30',
             'price' => 'required|numeric|max:10000',
-            'timeFrom' => 'required',
-            'timeTo' => 'required',
+            'timeFrom' => 'required|date_format:H:i',
+            'timeTo' => 'required|date_format:H:i',
         ]);
         $data['isFulled'] = isset($request->isFulled);
         // dd($data);
@@ -72,8 +72,8 @@ class ClassroomController extends Controller
             'className' => 'required|string',
             'capacity' => 'required|Numeric|max:30',
             'price' => 'required|numeric|max:10000',
-            'timeFrom' => 'required',
-            'timeTo' => 'required',
+            'timeFrom' => 'required|date_format:H:i',
+            'timeTo' => 'required|date_format:H:i',
         ]);
         $data['isFulled'] = isset($request->isFulled);
         // dd($data);

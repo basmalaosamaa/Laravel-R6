@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Traits\Common;
 use Illuminate\Http\Request;
 
 class CarController extends Controller
 {
+    use Common;
     /**
      * Display a listing of the resource.
      */
@@ -29,15 +31,17 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
         $data = $request->validate([
-            'carTitle' => 'requierd|string',
-            'description' => 'requierd|string|max:1000',
-            'price' => 'requierd|numeric|max:6',
+            'carTitle' => 'required|string',
+            'description' => 'required|string|max:1000',
+            'price' => 'required|numeric',
+            'published' =>'boolean',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
         ]);
-        $data['published'] = isset($request->published);
+        // $data['published'] = isset($request->published);
+        $data['image'] = $this->uploadFile($request->image, 'assets/images');
         Car::create($data);
-        return "Data added successfuly";
+        return redirect()->route('cars.index');
     }
 
     /**
@@ -63,15 +67,23 @@ class CarController extends Controller
     public function update(Request $request, string $id)
     {
         // dd($request , $id);
-        $data = [
-            'carTitle' => $request->carTitle,
-            'price' => $request->price,
-            'description' => $request->description,
-            'published' => isset($request->published),
-        ];
-        Car::where('id', $id)->update($data);
-        return redirect()->route('cars.index');
+        $data = $request->validate([
+            'carTitle' => 'required|string',
+            'description' => 'required|string|max:1000',
+            'price' => 'required',
+            'published' =>'boolean',
+            'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+        ]);
 
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadFile($request->image, 'assets/images');
+        }
+
+        // $data['published'] = isset($request->published);
+
+        Car::where('id', $id)->update($data);
+
+        return redirect()->route('cars.index');
     }
 
     /**
