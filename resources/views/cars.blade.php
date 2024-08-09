@@ -44,7 +44,7 @@
               <td>{{$car['price']}}</td>
               <td>{{Str::limit($car['description'] , 20)}}</td>
               <td>{{$car['published'] ? 'Yes' : 'No'}}</td>
-              <td><img src="{{ asset('assets/images/' . $car->image) }}" alt="{{ $car->name }}" width="100" height="100"></td>
+              <td><img src="{{asset('assets/images/cars/' . $car->image) }}" alt="{{ $car->CarTitle }}" width="100" height="100"></td>
               <td><a href="{{route('cars.edit', $car['id'])}}">Edit</a></td>
               <td><a href="{{route('cars.show', $car['id'])}}">Show</a></td>
               <td><form action="{{route('cars.destroy' , $car['id'])}}" method="POST">

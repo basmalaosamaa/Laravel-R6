@@ -49,6 +49,8 @@ Route::get('index' , [ExampleController::class , 'index']);
 //Task-9
 Route::resource('products' , ProductController::class);
 
+Route::get('about' , [ExampleController::class , 'about']);
+
 // Route::fallback(function () {
 //         return redirect('/');
 //     });

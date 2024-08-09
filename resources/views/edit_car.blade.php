@@ -58,7 +58,7 @@
           <label for="image" class="form-label col-md-2 fw-bold text-md-end">Image:</label>
           <div class="col-md-10">
             <input type="file" id="image" name="image" class="form-control" value="{{old('image' , $car->image)}}">
-            <img src="{{ asset('assets/images/' . $car->image) }}" alt="" class="img-thumbnail" width="200" height="200">
+            <img src="{{ asset('assets/images/cars/' . $car->image) }}" alt="" class="img-thumbnail" width="200" height="200">
             @error('image')
               <div class="alert alert-warning">{{$message}}</div>
               @enderror
