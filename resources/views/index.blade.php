@@ -229,7 +229,7 @@
                         <div class="col-lg-4 col-12 mb-3">
                             <div class="product-thumb">
                                 <a href="product-detail.html">
-                                    <img src="{{ asset('assets/images/' . $product['image']) }}" class="img-fluid product-image" alt="{{ $product['title'] }}">
+                                    <img src="{{ asset('assets/images/product/' . $product['image']) }}" class="img-fluid product-image" alt="{{ $product['title'] }}">
                                 </a>
 
                                 <div class="product-top d-flex">

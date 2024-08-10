@@ -46,8 +46,9 @@ Route::group([
 });
 
 Route::get('index' , [ExampleController::class , 'index']);
-//Task-9
+//Task
 Route::resource('products' , ProductController::class);
+Route::get('admin/products', [ProductController::class, 'indexAdmin'])->name('productsAdmin.index');
 
 Route::get('about' , [ExampleController::class , 'about']);
 
