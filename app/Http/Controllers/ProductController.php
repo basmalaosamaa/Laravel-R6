@@ -17,6 +17,11 @@ class ProductController extends Controller
         $products = Product::latest()->limit(3)->get();
         return view('index', compact('products'));
     }
+    public function indexAdmin()
+    {
+        $products = Product::get();
+        return view('productsAdmin', compact('products'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -37,9 +42,9 @@ class ProductController extends Controller
             'price' => 'required|decimal:1',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
         ]);
-        $data['image'] = $this->uploadFile($request->image, 'assets/images');
+        $data['image'] = $this->uploadFile($request->image, 'assets/images/product');
         Product::Create($data);
-        return 'product added successfully';
+        return redirect()->route('productsAdmin.index');
     }
 
     /**
@@ -55,7 +60,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view('edit_product', compact('product'));
     }
 
     /**
@@ -63,14 +68,27 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required|string|max:255',
+            'shortDesc' => 'required|string|max:1000',
+            'price' => 'required|decimal:2',
+            'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+        ]);
+        if ($request->hasFile('image')) {
+            $data['image'] = $this->uploadFile($request->image, 'assets/images/product');
+        }
+
+        $product->update($data);
+        return redirect()->route('productsAdmin.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Product $product)
-    {
-        //
-    }
+    // public function destroy(Product $product)
+    // {
+    //     $product->delete();
+    //     return redirect()->route('productsAdmin.index');
+
+    // }
 }

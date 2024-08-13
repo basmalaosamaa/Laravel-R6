@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>All Car</title>
+  <title>All Products</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -23,35 +23,25 @@
   <main>
     <div class="container my-5">
       <div class="bg-light p-5 rounded">
-        <h2 class="fw-bold fs-2 mb-5 pb-2">All Cars</h2>
+        <h2 class="fw-bold fs-2 mb-5 pb-2">All Products</h2>
         <table class="table table-hover">
           <thead>
             <tr class="table-dark">
-              <th scope="col">Car Title</th>
+              <th scope="col">Product Title</th>
               <th scope="col">Price</th>
-              <th scope="col">Description</th>
-              <th scope="col">Published</th>
+              <th scope="col">Short Description</th>
               <th scope="col">Image</th>
               <th scope="col">Edit</th>
-              <th scope="col">show</th>
-              <th scope="col">Delete</th>
             </tr>
           </thead>
           <tbody>
-            @foreach($cars as $car)
+            @foreach($products as $product)
             <tr>
-              <td scope="row">{{$car['carTitle']}}</td>
-              <td>{{$car['price']}}</td>
-              <td>{{Str::limit($car['description'] , 20)}}</td>
-              <td>{{$car['published'] ? 'Yes' : 'No'}}</td>
-              <td><img src="{{asset('assets/images/cars/' . $car->image) }}" alt="{{ $car->CarTitle }}" width="100" height="100"></td>
-              <td><a href="{{route('cars.edit', $car['id'])}}">Edit</a></td>
-              <td><a href="{{route('cars.show', $car['id'])}}">Show</a></td>
-              <td><form action="{{route('cars.destroy' , $car['id'])}}" method="POST">
-                @csrf
-                @method('delete')
-                <button type="submit" class="btn btn-link m-0 p-0" onclick="return confirm('are you sure you want to delete?')" >Delete</button>
-              </form></td>
+              <td scope="row">{{$product['title']}}</td>
+              <td>{{$product['price']}}</td>
+              <td>{{Str::limit($product['shortDesc'] , 20)}}</td>
+              <td><img src="{{asset('assets/images/product/' . $product->image) }}" alt="{{ $product->title }}" width="100" height="100"></td>
+              <td><a href="{{route('products.edit', $product)}}">Edit</a></td>
             </tr>
             @endforeach
           </tbody>
