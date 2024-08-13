@@ -52,6 +52,7 @@ Route::get('admin/products', [ProductController::class, 'indexAdmin'])->name('pr
 
 Route::get('about' , [ExampleController::class , 'about']);
 
+Route::get('testOneToOne' , [ExampleController::class , 'test']);
 // Route::fallback(function () {
 //         return redirect('/');
 //     });

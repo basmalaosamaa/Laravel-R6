@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
+use App\Models\Category;
 use App\Traits\Common;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::get();
+        $cars = Car::with('category')->get();
         return view('cars', compact('cars'));
     }
 
@@ -23,7 +24,8 @@ class CarController extends Controller
      */
     public function create()
     {
-        return view('add_car');
+        $categories = Category::select('id', 'category_name')->get();
+        return view('add_car', compact('categories'));
     }
 
     /**
@@ -35,12 +37,15 @@ class CarController extends Controller
             'carTitle' => 'required|string',
             'description' => 'required|string|max:1000',
             'price' => 'required|numeric',
-            'published' =>'boolean',
+            'published' => 'boolean',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
+            'category_id' => 'required',
         ]);
         // $data['published'] = isset($request->published);
-        $data['image'] = $this->uploadFile($request->image, 'assets/images');
-        Car::create($data);
+        $data['image'] = $this->uploadFile($request->image, 'assets/images/cars');
+        $car = Car::create($data);
+        // dd($data);
+        $car->category_id = $data['category_id'];
         return redirect()->route('cars.index');
     }
 
@@ -57,7 +62,8 @@ class CarController extends Controller
      */
     public function edit(Car $car)
     {
-        return view('edit_car', compact('car'));
+        $categories = Category::all();
+        return view('edit_car', compact('car', 'categories'));
 
     }
 
@@ -71,12 +77,14 @@ class CarController extends Controller
             'carTitle' => 'required|string',
             'description' => 'required|string|max:1000',
             'price' => 'required',
-            'published' =>'boolean',
+            'published' => 'boolean',
             'image' => 'sometimes|mimes:png,jpg,jpeg|max:2048',
+            'category_id' => 'required',
+
         ]);
 
         if ($request->hasFile('image')) {
-            $data['image'] = $this->uploadFile($request->image, 'assets/images');
+            $data['image'] = $this->uploadFile($request->image, 'assets/images/cars');
         }
 
         // $data['published'] = isset($request->published);
