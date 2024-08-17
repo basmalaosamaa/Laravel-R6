@@ -10,10 +10,10 @@ Route::get('', function () {
     return view('welcome');
 });
 
-// Route::get('contact' ,[ExampleController::class , 'contact']);
+// Route::get('contact/data' ,[ExampleController::class , 'contact']);
 // Route::post('contactdata' , [ExampleController::class , 'recieve'])->name('data');
 
-Route::prefix('cars')->controller(CarController::class)->as('cars.')->group(function () {
+Route::prefix('cars')->controller(CarController::class)->as('cars.')->middleware('verified')->group(function () {
 Route::get('', 'index')->name('index');
 Route::get('create', 'create');
 Route::post('', 'store')->name('store');
@@ -52,6 +52,7 @@ Route::get('admin/products', [ProductController::class, 'indexAdmin'])->name('pr
 
 Route::get('about' , [ExampleController::class , 'about']);
 
+Route::get('testOneToOne' , [ExampleController::class , 'test']);
 // Route::fallback(function () {
 //         return redirect('/');
 //     });
@@ -154,3 +155,7 @@ Route::get('about' , [ExampleController::class , 'about']);
 // Route::fallback(function () {
 //     return redirect('/');
 // });
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

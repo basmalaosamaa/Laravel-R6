@@ -29,6 +29,7 @@
             <tr class="table-dark">
               <th scope="col">Car Title</th>
               <th scope="col">Price</th>
+              <th scope="col">Category</th>
               <th scope="col">Description</th>
               <th scope="col">Published</th>
               <th scope="col">Image</th>
@@ -42,6 +43,7 @@
             <tr>
               <td scope="row">{{$car['carTitle']}}</td>
               <td>{{$car['price']}}</td>
+              <td>{{$car->category->category_name}}</td>
               <td>{{Str::limit($car['description'] , 20)}}</td>
               <td>{{$car['published'] ? 'Yes' : 'No'}}</td>
               <td><img src="{{asset('assets/images/cars/' . $car->image) }}" alt="{{ $car->CarTitle }}" width="100" height="100"></td>

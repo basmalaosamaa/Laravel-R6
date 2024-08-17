@@ -45,6 +45,20 @@
               @enderror
             </div>
           </div>
+           <div class="form-group mb-3 row">
+             <label for="category" class="form-label col-md-2 fw-bold text-md-end">Category:</label>
+                <div class="col-md-10">
+                   <select name="category_id" id="category" class="form-control">
+                    <option value="">Select Category</option>
+                    @foreach($categories as $category)
+                    <option value="{{$category->id}}"@selected(old('category_id' , $car->category_id) == $category->id)>{{$category->category_name}}</option>
+                    @endforeach
+                    </select>
+                    @error('category_id')
+                    <div class="alert alert-warning">{{$message}}</div>
+                    @enderror
+                </div>
+            </div>
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Description:</label>
             <div class="col-md-10">
@@ -68,7 +82,7 @@
           <div class="form-group mb-3 row">
             <label for="" class="form-label col-md-2 fw-bold text-md-end">Published:</label>
             <div class="col-md-10">
-              <input type="hidden" name="published" value="0"> 
+              <input type="hidden" name="published" value="0">
               <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published" value="1" {{ ($car->published || old('published')) ? 'checked' : '' }}/>
             </div>
           </div>
