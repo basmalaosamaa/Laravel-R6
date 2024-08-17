@@ -51,10 +51,10 @@
                    <select name="category_id" id="category" class="form-control">
                     <option value="">Select Category</option>
                     @foreach($categories as $category)
-                    <option value="{{$category->id}}"{{ $car->category_id == $category->id ? 'selected' : '' }}>{{$category->category_name}}</option>
+                    <option value="{{$category->id}}"@selected(old('category_id' , $car->category_id) == $category->id)>{{$category->category_name}}</option>
                     @endforeach
                     </select>
-                    @error('category')
+                    @error('category_id')
                     <div class="alert alert-warning">{{$message}}</div>
                     @enderror
                 </div>

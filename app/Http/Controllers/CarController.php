@@ -39,21 +39,24 @@ class CarController extends Controller
             'price' => 'required|numeric',
             'published' => 'boolean',
             'image' => 'required|mimes:png,jpg,jpeg|max:2048',
-            'category_id' => 'required',
+            'category_id' => 'required|exists:categories,id',
         ]);
         // $data['published'] = isset($request->published);
         $data['image'] = $this->uploadFile($request->image, 'assets/images/cars');
         $car = Car::create($data);
         // dd($data);
-        $car->category_id = $data['category_id'];
         return redirect()->route('cars.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Car $car)
+    public function show(string $id)
     {
+        // There two ways to retrieve Category Name :
+        //one is === $categoryname = $car->category->category_name;
+        $car = Car::with('category')->findOrFail($id); // <- the other
+        // dd($car->category->category_name);
         return view('car_details', compact('car'));
     }
 
