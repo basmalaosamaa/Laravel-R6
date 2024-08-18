@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ExampleController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -10,8 +11,8 @@ Route::get('', function () {
     return view('welcome');
 });
 
-// Route::get('contact/data' ,[ExampleController::class , 'contact']);
-// Route::post('contactdata' , [ExampleController::class , 'recieve'])->name('data');
+Route::get('contactUs' ,[ContactController::class , 'show']);
+Route::post('contact' , [ContactController::class , 'store'])->name('data');
 
 Route::prefix('cars')->controller(CarController::class)->as('cars.')->middleware('verified')->group(function () {
 Route::get('', 'index')->name('index');
