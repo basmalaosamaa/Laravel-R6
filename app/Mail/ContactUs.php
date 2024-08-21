@@ -2,15 +2,13 @@
 
 namespace App\Mail;
 
+use function Pest\Laravel\from;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
-
-use function Pest\Laravel\from;
 
 class ContactUs extends Mailable
 {
@@ -19,12 +17,9 @@ class ContactUs extends Mailable
     /**
      * Create a new message instance.
      */
-    public $data;
 
-    public function __construct($data)
-    {
-        $this->data = $data;
-    }
+    public function __construct(protected $data)
+    {}
 
     /**
      * Get the message envelope.
@@ -33,7 +28,7 @@ class ContactUs extends Mailable
     {
         return new Envelope(
             subject: 'Contact Us',
-            from: new Address('yourmail@gmail.com' , 'basmala')
+            from: new Address($this->data['email'], $this->data['name'])
         );
     }
 
@@ -44,6 +39,9 @@ class ContactUs extends Mailable
     {
         return new Content(
             markdown: 'emails.Contact',
+            with: [      //to send protected data
+                'data' => $this->data,
+            ]
         );
     }
 

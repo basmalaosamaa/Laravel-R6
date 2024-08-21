@@ -13,15 +13,10 @@ class ContactController extends Controller
     }
 
     public function store(Request $request){
-        $data = $request->validate([
-            'name' => 'required|min:3' ,
-            'email' => 'required|email' ,
-            'subj' => 'required|' ,
-            'msg' => 'required|min:5' ,
-        ]);
+        $data = $request->except('_token');
 
-        Mail::to('receipentemail@gmail.com')->send(new ContactUs($data));
-        dd('send');
-        return redirect()->back()->with('success' , 'message send successfully');
+        Mail::to('test@example.com')->send(new ContactUs ($data));
+
+        return "Message sent successfuly";
     }
 }
