@@ -45,7 +45,7 @@ class CarController extends Controller
         $data['image'] = $this->uploadFile($request->image, 'assets/images/cars');
         $car = Car::create($data);
         // dd($data);
-        return redirect()->route('cars.index');
+        return redirect()->route('cars.index')->with('content' , 'Car added successfully');
     }
 
     /**

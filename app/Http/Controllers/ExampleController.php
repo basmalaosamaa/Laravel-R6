@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class ExampleController extends Controller
 {
     function contact (){
+        
         return view('Contact');
     }
     function recieve (Request $request){
