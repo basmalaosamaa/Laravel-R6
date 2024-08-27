@@ -26,13 +26,13 @@
             <div class="bg-light p-5 rounded">
                 <a href="{{ LaravelLocalization::getLocalizedURL('en') }}">English</a>
                 <a href="{{ LaravelLocalization::getLocalizedURL('ar') }}">Arabic</a>
-                <h2 class="fw-bold fs-2 mb-5 pb-2">{{ __('cars.addHeading') }}</h2>
+                <h2 class="fw-bold fs-2 mb-5 pb-2">{{ __('validation.attributes.addHeading') }}</h2>
                 <form action="{{ route('cars.store') }}" method="POST" enctype="multipart/form-data" class="px-md-5">
                     @csrf
                     <div class="form-group mb-3 row">
-                        <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.Transltitle') }} :</label>
+                        <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('validation.attributes.Transltitle') }} :</label>
                         <div class="col-md-10">
-                            <input type="text" placeholder="{{ __('cars.placeholder.title') }}" class="form-control py-2" name="carTitle"
+                            <input type="text" placeholder="{{__('validation.attributes.placeholder.title')}}" class="form-control py-2" name="carTitle"
                                 value="{{ old('carTitle') }}" />
                             @error('carTitle')
                                 <div class="alert alert-warning">{{ $message }}</div>
@@ -40,9 +40,9 @@
                         </div>
                     </div>
                     <div class="form-group mb-3 row">
-                        <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.Translprice') }}:</label>
+                        <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('validation.attributes.Translprice') }}:</label>
                         <div class="col-md-10">
-                            <input type="text" step="0.1" placeholder="{{ __('cars.placeholder.price') }}" class="form-control py-2"
+                            <input type="text" step="0.1" placeholder="{{ __('validation.attributes.placeholder.price') }}" class="form-control py-2"
                                 name="price" value="{{ old('price') }}" />
                             @error('price')
                                 <div class="alert alert-warning">{{ $message }}</div>
@@ -50,10 +50,10 @@
                         </div>
                     </div>
                     <div class="form-group mb-3 row">
-                        <label for="category" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.Translcategory') }}:</label>
+                        <label for="category" class="form-label col-md-2 fw-bold text-md-end">{{ __('validation.attributes.Translcategory') }}:</label>
                         <div class="col-md-10">
                             <select name="category_id" id="category" class="form-control">
-                                <option value="">{{ __('cars.placeholder.category') }}</option>
+                                <option value="">{{ __('validation.attributes.placeholder.category') }}</option>
                                 @foreach ($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                                 @endforeach
@@ -64,7 +64,7 @@
                         </div>
                     </div>
                     <div class="form-group mb-3 row">
-                        <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.Transldesc') }}:</label>
+                        <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('validation.attributes.Transldesc') }}:</label>
                         <div class="col-md-10">
                             <textarea id="" cols="30" rows="5" class="form-control py-2" name="description">{{ old('description') }}</textarea>
                             @error('description')
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="form-group mb-3 row">
-                        <label for="image" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.Translimg') }}:</label>
+                        <label for="image" class="form-label col-md-2 fw-bold text-md-end">{{ __('validation.attributes.Translimg') }}:</label>
                         <div class="col-md-10">
                             <input type="file" id="image" name="image" required="required"
                                 class="form-control">
@@ -84,7 +84,7 @@
                     </div>
                     <hr>
                     <div class="form-group mb-3 row">
-                        <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('cars.Translpublish') }}:</label>
+                        <label for="" class="form-label col-md-2 fw-bold text-md-end">{{ __('validation.attributes.Translpublish') }}:</label>
                         <div class="col-md-10">
                             <input type="checkbox" class="form-check-input" style="padding: 0.7rem;" name="published"
                                 value="1" {{ old('published') ? 'checked' : '' }}>
@@ -95,7 +95,7 @@
                     </div>
                     <div class="text-md-end">
                         <button class="btn mt-4 btn-secondary text-white fs-5 fw-bold border-0 py-2 px-md-5">
-                            {{ __('cars.Transladd') }}
+                            {{ __('validation.attributes.Transladd') }}
                         </button>
                     </div>
                 </form>
